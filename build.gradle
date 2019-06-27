@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.franzbecker:gradle-lombok:2.1"
+        classpath "io.qameta.allure:allure-gradle:2.5"
+
+    }
+
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.franzbecker.gradle-lombok'
+    apply plugin: 'io.qameta.allure'
+
+    test{
+        useTestNG()
+    }
+
+    allure {
+        version = '2.7.0'
+        autoconfigure = true
+        aspectjweaver = true
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies{
+        compile group: 'io.qameta.allure', name: 'allure-testng', version: '2.12.1'
+        compile group: 'org.testng', name: 'testng', version: '6.14.3'
+    }
+
+
+}
